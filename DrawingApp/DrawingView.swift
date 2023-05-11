@@ -13,16 +13,16 @@ struct DrawingView: View {
     @State private var selectedLineWidth: CGFloat = 5
     @State private var deletedLines = [Line]()
     @State private var showConfirmationDialog = false
-    
     let engine = DrawingEngine()
     
     var body: some View {
         VStack {
             
+            // Top Bar View
             TopBarView(selectedColor: $selectedColor, selectedLineWidth: $selectedLineWidth)
-            
             Divider()
             
+            // Canvas area
             Canvas { context, size in
                 for line in lines {
                     let path = engine.createPath(for: line.points)
@@ -47,10 +47,12 @@ struct DrawingView: View {
                         }
                     })
             )
-            
             Divider()
             
+            // Bottom Bar Buttons
             HStack(spacing: 80) {
+                
+                // Undo button
                 Button {
                         let last = lines.removeLast()
                     deletedLines.append(last)
@@ -60,6 +62,8 @@ struct DrawingView: View {
                 }
                 .disabled(lines.isEmpty)
                 
+                
+                // Reset All button
                 Button {
                     showConfirmationDialog.toggle()
                 } label: {
@@ -76,6 +80,7 @@ struct DrawingView: View {
                     Text("Are you sure you want to delete everything?")
                 }
                 
+                // Redu button
                 Button {
                         let last = deletedLines.removeLast()
                         lines.append(last)

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		40623E412A0C5AB700212C21 /* DrawingAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40623E402A0C5AB700212C21 /* DrawingAppApp.swift */; };
-		40623E432A0C5AB700212C21 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40623E422A0C5AB700212C21 /* ContentView.swift */; };
 		40623E452A0C5AB900212C21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40623E442A0C5AB900212C21 /* Assets.xcassets */; };
 		40623E482A0C5AB900212C21 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40623E472A0C5AB900212C21 /* Preview Assets.xcassets */; };
 		40623E512A0C5D5400212C21 /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40623E502A0C5D5400212C21 /* DrawingView.swift */; };
@@ -20,7 +19,6 @@
 /* Begin PBXFileReference section */
 		40623E3D2A0C5AB700212C21 /* DrawingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40623E402A0C5AB700212C21 /* DrawingAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingAppApp.swift; sourceTree = "<group>"; };
-		40623E422A0C5AB700212C21 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		40623E442A0C5AB900212C21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40623E472A0C5AB900212C21 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		40623E502A0C5D5400212C21 /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
@@ -60,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				40623E402A0C5AB700212C21 /* DrawingAppApp.swift */,
-				40623E422A0C5AB700212C21 /* ContentView.swift */,
 				40623E502A0C5D5400212C21 /* DrawingView.swift */,
 				40623E562A0D832F00212C21 /* TopBarView.swift */,
 				40623E542A0D757F00212C21 /* DrawingEngine.swift */,
@@ -152,7 +149,6 @@
 				40623E552A0D757F00212C21 /* DrawingEngine.swift in Sources */,
 				40623E512A0C5D5400212C21 /* DrawingView.swift in Sources */,
 				40623E532A0C5DAC00212C21 /* Line.swift in Sources */,
-				40623E432A0C5AB700212C21 /* ContentView.swift in Sources */,
 				40623E572A0D832F00212C21 /* TopBarView.swift in Sources */,
 				40623E412A0C5AB700212C21 /* DrawingAppApp.swift in Sources */,
 			);
