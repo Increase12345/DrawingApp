@@ -8,25 +8,26 @@
 import SwiftUI
 
 struct DrawingView: View {
-    @State private var lines = [Line(points: [CGPoint(x: 10, y: 10), CGPoint(x: 100, y: 100)], color: .red, lineWidth: 1)]
+    @State private var lines = [Line]()
     @State private var selectedColor: Color = .black
-    @State private var selectedLineWidth: CGFloat = 1
+    @State private var selectedLineWidth: CGFloat = 5
+    @State private var deletedLines = [Line]()
+    @State private var showConfirmationDialog = false
     
+    let engine = DrawingEngine()
     
     var body: some View {
         VStack {
             
-            ColorPicker("Line Color", selection: $selectedColor)
-            Slider(value: $selectedLineWidth, in: 1...20) {
-                Text("linewidth")
-            }
+            TopBarView(selectedColor: $selectedColor, selectedLineWidth: $selectedLineWidth)
+            
+            Divider()
             
             Canvas { context, size in
                 for line in lines {
-                    var path = Path()
-                    path.addLines(line.points)
+                    let path = engine.createPath(for: line.points)
                     
-                    context.stroke(path, with: .color(line.color), lineWidth: line.lineWidth)
+                    context.stroke(path, with: .color(line.color), style: StrokeStyle(lineWidth: line.lineWidth, lineCap: .round, lineJoin: .round))
                 }
             }
             .gesture(
@@ -40,7 +41,51 @@ struct DrawingView: View {
                             lines[index].points.append(newPoint)
                         }
                     })
+                    .onEnded({ value in
+                        if let last = lines.last?.points, last.isEmpty {
+                            lines.removeLast()
+                        }
+                    })
             )
+            
+            Divider()
+            
+            HStack(spacing: 80) {
+                Button {
+                        let last = lines.removeLast()
+                    deletedLines.append(last)
+                } label: {
+                    Image(systemName: "arrow.uturn.backward")
+                        .foregroundColor(lines.isEmpty ? .gray: .green)
+                }
+                .disabled(lines.isEmpty)
+                
+                Button {
+                    showConfirmationDialog.toggle()
+                } label: {
+                    Image(systemName: "trash")
+                        .foregroundColor(lines.isEmpty && deletedLines.isEmpty ? .gray: .red)
+                }
+                .disabled(lines.isEmpty && deletedLines.isEmpty)
+                .confirmationDialog("", isPresented: $showConfirmationDialog) {
+                    Button("Delete", role: .destructive) {
+                        lines = [Line]()
+                        deletedLines = [Line]()
+                    }
+                } message: {
+                    Text("Are you sure you want to delete everything?")
+                }
+                
+                Button {
+                        let last = deletedLines.removeLast()
+                        lines.append(last)
+                } label: {
+                    Image(systemName: "arrow.uturn.forward")
+                        .foregroundColor(deletedLines.isEmpty ? .gray: .green)
+                }
+                .disabled(deletedLines.isEmpty)
+            }
+            .font(.title)
         }
     }
 }
